@@ -40,58 +40,6 @@ def home():
         return('home')
 
 
-def get_day_score(date):
-    apikey = '7240a951-22c7-4a0c-b816-ef4ef6'
-    try:
-        response = requests.get(
-
-            url='https://api.mysportsfeeds.com/v2.1/pull/nba/current/date/{0}/games.json?status=final'.format(date),
-            params={
-                "fordate": date
-            },
-            headers={
-                "Authorization": "Basic " + base64.b64encode('{}:{}'.format(apikey,'MYSPORTSFEEDS').encode('utf-8')).decode('ascii')
-            }
-        )
-
-        print('Response HTTP Status Code: {status_code}'.format(
-            status_code=response.status_code))
-    except requests.exceptions.RequestException:
-        print('HTTP Request failed')
-    jsonVals = json.loads(response.text)
-    games = jsonVals['games']
-    scores = []
-    for game in games:
-        score = {}
-        score['away'] = {}
-        score['home'] = {}
-        score['away']['team'] = game['schedule']['awayTeam']['abbreviation']
-        score['home']['team'] = game['schedule']['homeTeam']['abbreviation']
-        score['away']['score'] = game['score']["awayScoreTotal"]
-        score['home']['score'] = game['score']["homeScoreTotal"]
-        scores.append(score)
-    smsString = ''
-    for score in scores:
-        awayScore = score['away']['score']
-        homeScore = score['home']['score']
-        awayTeam = score['away']['team']
-        homeTeam = score['home']['team']
-        if homeScore > awayScore:
-            winningTeam = homeTeam
-            winningScore = homeScore
-            losingScore = awayScore
-        elif homeScore < awayScore:
-            winningTeam = awayTeam
-            winningScore = awayScore
-            losingScore = homeScore
-        else:
-            winningTeam = ''
-            winningScore = homeScore
-            losingScore = homeScore
-
-        smsString = smsString + ('{0} at {1}, final {2}-{3} {4}'.format(awayTeam, homeTeam, winningScore, losingScore, winningTeam))
-    return smsString
-
 @app.route('/sms', methods=['POST'])
 def sms_handler():
 
@@ -178,10 +126,10 @@ def config_database(app):
     :param app: configured Flask object.
     :return: None
     """
-    app_path = '/opt/smsblog'
+    app_path = '/opt/rvwr'
     if not os.path.exists(app_path):
         os.mkdir(app_path)
-    db_path = 'sqlite:///%s/smsblog.db' % app_path
+    db_path = 'sqlite:///%s/rvwr.db' % app_path
     app.config['SQLALCHEMY_DATABASE_URI'] = db_path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     DB.app = app
@@ -197,10 +145,10 @@ def setup_logging(debug=False, verbose=False):
     :return: None
     """
     logger = logging.getLogger()
-    log_dir = '/opt/smsblog'
+    log_dir = '/opt/rvwr'
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
-    file_name = os.path.join(log_dir, 'smsblog.log')
+    file_name = os.path.join(log_dir, 'rvwr.log')
     logger.setLevel(logging.WARNING)
     if debug:
         logger.setLevel(logging.DEBUG)
@@ -281,4 +229,3 @@ def launch_api():
             list_token()
         else:
             gen_token()
-

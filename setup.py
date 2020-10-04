@@ -7,7 +7,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-NAME = 'smsblog'
+NAME = 'rvwr'
 PWD = os.path.abspath(os.path.dirname(__name__))
 
 METADATA_FILE = os.path.join(PWD, NAME, '__init__.py')
@@ -33,13 +33,12 @@ setup(
     install_requires=REQUIREMENTS,
     zip_safe=True,
     entry_points={
-        'console_scripts': ['smsblog=smsblog.smsblog:launch_api']
+        'console_scripts': ['rvwr=rvwr.rvwr:launch_api']
     },
     classifiers=(
         'Development Status :: 4 - Beta',
         'Environment :: Console',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3 :: Only',
