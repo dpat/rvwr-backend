@@ -8,9 +8,9 @@ import requests
 import datetime
 from twilio.rest import Client
 
-ACCOUNT_SID = 'ACece666d4e0527c050070a6635e0355dc'
-AUTH_TOKEN = '620c522b5424afa689328196ffceb3c9'
-NOTIFY_SERVICE_SID = 'ISb17d4f8b7da6914ac19c89b85fa1ea7e'
+ACCOUNT_SID = ''
+AUTH_TOKEN = ''
+NOTIFY_SERVICE_SID = ''
 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
