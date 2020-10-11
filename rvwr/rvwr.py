@@ -20,13 +20,13 @@ from .database import DB
 from .database.utils import create_tables
 from .errors import badrequest, forbidden, gone, internalservererror, \
                     methodnotallowed, notfound, unauthorized
-from .helpers.reminder_utils import initiate_reminders
+from .helpers.review_utils import initiate_reviews
 from .helpers.bphandler import BPHandler
 from .helpers.formatting import response_string, request_sms_args, \
                                 request_api_args
 from .helpers.security import gen_token, list_token, verify_request, \
                               verify_twilio
-from .routes import blog, personal, random, reminder, numbers
+from .routes import blog, personal, random, review, numbers
 
 app = Flask(__name__)
 
@@ -51,9 +51,6 @@ def sms_handler():
     if not verify_twilio(request, app):
         resp.message("unverified twilio request has been sent")
         return str(resp)
-        smsString = get_day_score('20200819')
-        responseScore = make_response(jsonify(smsString), 201)
-        resp.message(response_string(responseScore))
 
     # confirm request is coming from correct phone line
     if not num == app.config.get('num'):
@@ -66,8 +63,8 @@ def sms_handler():
         resp.message(response_string(blog.handler(args[1:])))
     elif args[0].lower() == 'personal':
         resp.message(response_string(personal.handler(args[1:])))
-    elif args[0].lower() == 'reminder':
-        resp.message(response_string(reminder.handler(args[1:])))
+    elif args[0].lower() == 'review':
+        resp.message(response_string(review.handler(args[1:])))
     elif args[0].lower() == 'random':
         resp.message(response_string(random.handler(args[1:])))
     else:
@@ -89,8 +86,8 @@ def api_handler():
         return blog.handler(args[1:])
     elif args[0].lower() == 'personal':
         return personal.handler(args[1:])
-    elif args[0].lower() == 'reminder':
-        return reminder.handler(args[1:])
+    elif args[0].lower() == 'review':
+        return review.handler(args[1:])
     elif args[0].lower() == 'random':
         return random.handler(args[1:])
     elif args[0].lower() == 'daily_scores':
@@ -194,7 +191,7 @@ def launch_api():
                      help='number of site owner',
                      default=None)
     run.add_argument('-t', '--tnum',
-                     help='number for twilio reminder texts',
+                     help='number for twilio review texts',
                      default=None)
     run.add_argument('-u', '--url',
                      help='public url of site',
