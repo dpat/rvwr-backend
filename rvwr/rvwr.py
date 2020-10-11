@@ -8,8 +8,8 @@ import requests
 import datetime
 from twilio.rest import Client
 
-ACCOUNT_SID = ''
-AUTH_TOKEN = ''
+ACCOUNT_SID = 'ACece666d4e0527c050070a6635e0355dc'
+AUTH_TOKEN = '371a7cc578e5d5c3398d9be7deed0de1'
 NOTIFY_SERVICE_SID = ''
 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
@@ -20,7 +20,6 @@ from .database import DB
 from .database.utils import create_tables
 from .errors import badrequest, forbidden, gone, internalservererror, \
                     methodnotallowed, notfound, unauthorized
-from .helpers.review_utils import initiate_reviews
 from .helpers.bphandler import BPHandler
 from .helpers.formatting import response_string, request_sms_args, \
                                 request_api_args
