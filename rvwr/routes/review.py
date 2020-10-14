@@ -30,17 +30,17 @@ def handler(command):
     else:
         product = command[0]
         score = command[1]
-        review = command[2:]
+        body = command[2:]
 
-        return add_review(product, score, review)
+        return add_review(product, score, body)
 
 
-def add_review(product, score, review):
+def add_review(product, score, body):
     """Add a single review to the database."""
 
-    message = ' '.join(message)
+    body = ' '.join(body)
     review = {}
-    values = {'product': product, 'score': score, 'review': review}
+    values = {'productid': product, 'score': score, 'body': body}
     for field in values.keys():
         if field in inspect(Review).mapper.column_attrs:
             review[field] = values[field]
