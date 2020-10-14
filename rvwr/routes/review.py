@@ -15,7 +15,7 @@ from ..errors.notfound import NotFound
 
 
 REVIEW_BP = Blueprint('review', __name__)
-BPHandler.add_blueprint(review_BP)
+BPHandler.add_blueprint(REVIEW_BP)
 
 
 def handler(command):
