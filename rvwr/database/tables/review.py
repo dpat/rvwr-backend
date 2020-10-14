@@ -17,7 +17,7 @@ class Review(DB.Model):
 
     __tablename__ = 'review'
     reviewid = DB.Column(DB.Integer, nullable=False, primary_key=True)
-    productid = DB.Column(DB.Text, nullable=False)
+    productid = DB.Column(DB.Integer, nullable=False)
     score = DB.Column(DB.Integer, nullable=False)
     body = DB.Column(DB.Text, nullable=False)
     date = DB.Column(DB.DateTime, nullable=False,

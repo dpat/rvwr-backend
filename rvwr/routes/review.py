@@ -35,12 +35,12 @@ def handler(command):
         return add_review(product, score, body)
 
 
-def add_review(product, score, body):
+def add_review(productid, score, body):
     """Add a single review to the database."""
 
     body = ' '.join(body)
     review = {}
-    values = {'productid': product, 'score': score, 'body': body}
+    values = {'productid': productid, 'score': score, 'body': body}
     for field in values.keys():
         if field in inspect(Review).mapper.column_attrs:
             review[field] = values[field]
