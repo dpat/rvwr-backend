@@ -92,7 +92,7 @@ def api_handler():
     elif args[0].lower() == 'daily_scores':
         return send_bulk_sms()
     else:
-        return send_bulk_sms()
+        raise Exception(args)
 	#numbers.handler(args)
 
 def send_bulk_sms():

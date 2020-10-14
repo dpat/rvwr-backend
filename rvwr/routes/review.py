@@ -57,7 +57,7 @@ def get_review(id):
 
     if id == 'all':
         list_of_reviews = []
-        reviews = Reviews.query.all()
+        reviews = Review.query.all()
         for review in reviews:
             list_of_reviews.append(table2dict(review))
         return make_response(jsonify(list_of_reviews), 200)
