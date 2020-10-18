@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+from rvwr import rvwr
+
+app = rvwr.return_app()
+rvwr.BPHandler.register_blueprints(app)
+rvwr.config_database(app)
+app.config['num'] = 'placeholder_num'
+app.config['site_url'] = 'placeholder_url'
+app.config['auth_token'] = 'placeholder_auth_token'
+application = app

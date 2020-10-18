@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+from rvwrfront.rvwrfront.rvwrfront import app
+
+app.config['baseurl'] = 'placeholder_url'
+app.config['token'] = 'placeholder_token'
+app.config['password'] = 'placeholder_pass'
+application = app

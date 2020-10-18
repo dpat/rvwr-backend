@@ -1,0 +1,37 @@
+NameVirtualHost         *:80
+
+<VirtualHost *:80>
+                ServerName sms.placeholder_url
+                WSGIScriptAlias / /var/www/rvwr-backend/rvwr-backend.wsgi
+                <Directory /var/www/rvwr-backend/rvwr-backend/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/rvwr-backend/rvwr-backend/static
+                <Directory /var/www/rvwr-backend/rvwr-backend/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+                ServerName placeholder_url
+                WSGIScriptAlias / /var/www/rvwrfront/rvwrfront.wsgi
+                <Directory /var/www/rvwrfront/rvwrfront/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+                Alias /static /var/www/rvwrfront/rvwrfront/static
+                <Directory /var/www/rvwrfront/rvwrfront/static/>
+                        Order allow,deny
+                        Allow from all
+                </Directory>
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                LogLevel warn
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
