@@ -25,7 +25,7 @@ from .helpers.formatting import response_string, request_sms_args, \
                                 request_api_args
 from .helpers.security import gen_token, list_token, verify_request, \
                               verify_twilio
-from .routes import blog, personal, random, review, numbers
+from .routes import review, numbers
 
 app = Flask(__name__)
 
@@ -59,13 +59,9 @@ def sms_handler():
     args = request_sms_args(request)
 
     if args[0].lower() == 'blog':
-        resp.message(response_string(blog.handler(args[1:])))
-    elif args[0].lower() == 'personal':
-        resp.message(response_string(personal.handler(args[1:])))
+        resp.message(response_string(review.handler(args[1:])))
     elif args[0].lower() == 'review':
         resp.message(response_string(review.handler(args[1:])))
-    elif args[0].lower() == 'random':
-        resp.message(response_string(random.handler(args[1:])))
     else:
         resp.message(response_string(random.collector(args)))
 
@@ -80,13 +76,9 @@ def api_handler():
     args = request_api_args(request)
 
     if args[0].lower() == 'blog':
-        return blog.handler(args[1:])
-    elif args[0].lower() == 'personal':
-        return personal.handler(args[1:])
+        return review.handler(args[1:])
     elif args[0].lower() == 'review':
         return review.handler(args[1:])
-    elif args[0].lower() == 'random':
-        return random.handler(args[1:])
     elif args[0].lower() == 'daily_scores':
         return send_bulk_sms()
     else:
