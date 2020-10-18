@@ -108,7 +108,7 @@ service apache2 restart
 
 
 ###TODO:
-- Add single user URLS
+- Add single use URLS
 - HTTPS upgrade from http
 - Authentication for admins
 - Separate out viewing and posting reviews
