@@ -12,4 +12,4 @@ from ..errors.notfound import NotFound
 def collector(command):
 
     message = 'to send a review, text "review productid score review_message"'
-    return make_response(message)
+    return make_response(jsonify(message))

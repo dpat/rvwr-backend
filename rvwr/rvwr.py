@@ -58,10 +58,11 @@ def sms_handler():
 
     args = request_sms_args(request)
 
-    elif args[0].lower() == 'review':
+    if args[0].lower() == 'review':
         resp.message(response_string(review.handler(args[1:])))
     else:
-        return helper.collector(args)
+        helpResp = helper.collector(args)
+        resp.message(response_string(helpResp))
 
     return str(resp)
 
@@ -73,7 +74,7 @@ def api_handler():
         return False
     args = request_api_args(request)
 
-    elif args[0].lower() == 'review':
+    if args[0].lower() == 'review':
         return review.handler(args[1:])
 
     else:
