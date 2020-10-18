@@ -2,7 +2,7 @@
 from sqlalchemy import inspect
 
 from . import DB
-from .tables import blog, personal, random, review, token, user
+from .tables import review, token, user
 
 
 def create_tables():
