@@ -50,61 +50,61 @@ reasons.  I understand that this can be tricky with javascript.
 
 ### Installing and running rvwr (for use w/ digital ocean Ubuntu)
 
-apt-get update \n
-apt-get install -y pinentry-curses xz-utils python3-pip git \n
-apt-get clean \n
+apt-get update   
+apt-get install -y pinentry-curses xz-utils python3-pip git   
+apt-get clean   
 
-cd ~ \n
-pip3 install virtualenv \n
-virtualenv venv \n
-ENV PATH="~/venv/bin/activate:${PATH}" \n
+cd ~   
+pip3 install virtualenv   
+virtualenv venv   
+ENV PATH="~/venv/bin/activate:${PATH}"   
 
-apt-get update \n
-apt-get install -y apache2 libapache2-mod-wsgi-py3 python3-dev \n
-apt-get clean \n
+apt-get update   
+apt-get install -y apache2 libapache2-mod-wsgi-py3 python3-dev   
+apt-get clean   
 
-cd ~ \n
-git clone https://github.com/dpat/rvwrfront.git \n
-git clone https://github.com/dpat/rvwr-backend.git \n
-cd rvwr-backend \n
-pip3 install -r requirements.txt \n
-pip3 install . \n
-rvwr init \n
+cd ~   
+git clone https://github.com/dpat/rvwrfront.git   
+git clone https://github.com/dpat/rvwr-backend.git   
+cd rvwr-backend   
+pip3 install -r requirements.txt   
+pip3 install .   
+rvwr init   
 
-cp rvwrfront_wsgi.txt ~/rvwrfront_wsgi.txt \n
-cp rvwr_backend_wsgi.txt ~/rvwr_backend_wsgi.txt \n
-cp rvwr_conf.txt ~/rvwr_conf.txt \n
+cp rvwrfront_wsgi.txt ~/rvwrfront_wsgi.txt   
+cp rvwr_backend_wsgi.txt ~/rvwr_backend_wsgi.txt   
+cp rvwr_conf.txt ~/rvwr_conf.txt   
 
-cd ~/rvwr_backend \n
-TOKEN="$(rvwr token)" \n
+cd ~/rvwr_backend   
+TOKEN="$(rvwr token)"   
 
-cd ~ \n
-sed -i "s@placeholder_num@$NUMBER@g" rvwr-backend_wsgi.txt \n
-sed -i "s@placeholder_url@$DOMAIN@g" rvwr-backend_wsgi.txt \n
-sed -i "s@placeholder_auth_token@$AUTH_TOKEN@g" rvwr-backend_wsgi.txt \n
+cd ~   
+sed -i "s@placeholder_num@$NUMBER@g" rvwr-backend_wsgi.txt   
+sed -i "s@placeholder_url@$DOMAIN@g" rvwr-backend_wsgi.txt   
+sed -i "s@placeholder_auth_token@$AUTH_TOKEN@g" rvwr-backend_wsgi.txt   
 
-sed -i "s@placeholder_url@$DOMAIN@g" rvwrfront_wsgi.txt \n
-sed -i "s@placeholder_token@$TOKEN@g" rvwrfront_wsgi.txt \n
-sed -i "s@placeholder_pass@$PASSWORD@g" rvwrfront_wsgi.txt \n
+sed -i "s@placeholder_url@$DOMAIN@g" rvwrfront_wsgi.txt   
+sed -i "s@placeholder_token@$TOKEN@g" rvwrfront_wsgi.txt   
+sed -i "s@placeholder_pass@$PASSWORD@g" rvwrfront_wsgi.txt   
 
 
-sed -i "s@placeholder_url@$DOMAIN@g" rvwr_conf.txt \n
+sed -i "s@placeholder_url@$DOMAIN@g" rvwr_conf.txt   
 
-echo "$IP $DOMAIN" >> /etc/hosts \n
-echo "$IP sms.$DOMAIN" >> /etc/hosts \n
+echo "$IP $DOMAIN" >> /etc/hosts   
+echo "$IP sms.$DOMAIN" >> /etc/hosts   
 
-mkdir /var/www/rvwr-backend \n
-mkdir /var/www/rvwrfront \n
-cp -r rvwrfront /var/www/rvwrfront/. \n
-cp rvwr-backend_wsgi.txt /var/www/rvwr-backend/rvwr-backend.wsgi \n
-cp rvwrfront_wsgi.txt /var/www/rvwrfront/rvwrfront.wsgi \n
-cp rvwr_conf.txt /etc/apache2/sites-available/rvwr.conf \n
-cp rvwr_conf.txt /etc/apache2/sites-enabled/rvwr.con \n
+mkdir /var/www/rvwr-backend   
+mkdir /var/www/rvwrfront   
+cp -r rvwrfront /var/www/rvwrfront/.   
+cp rvwr-backend_wsgi.txt /var/www/rvwr-backend/rvwr-backend.wsgi   
+cp rvwrfront_wsgi.txt /var/www/rvwrfront/rvwrfront.wsgi   
+cp rvwr_conf.txt /etc/apache2/sites-available/rvwr.conf   
+cp rvwr_conf.txt /etc/apache2/sites-enabled/rvwr.con   
 
-chmod 777 /opt/rvwr/rvwr.db \n
-chmod 777 /opt/rvwr/ \n
+chmod 777 /opt/rvwr/rvwr.db   
+chmod 777 /opt/rvwr/   
 
-service apache2 restart 
+service apache2 restart
 
 
 ###TODO:
