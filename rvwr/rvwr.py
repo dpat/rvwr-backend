@@ -9,7 +9,7 @@ import datetime
 from twilio.rest import Client
 
 ACCOUNT_SID = 'ACece666d4e0527c050070a6635e0355dc'
-AUTH_TOKEN = '371a7cc578e5d5c3398d9be7deed0de1'
+AUTH_TOKEN = ''
 NOTIFY_SERVICE_SID = ''
 
 client = Client(ACCOUNT_SID, AUTH_TOKEN)
@@ -58,12 +58,10 @@ def sms_handler():
 
     args = request_sms_args(request)
 
-    if args[0].lower() == 'blog':
-        resp.message(response_string(review.handler(args[1:])))
     elif args[0].lower() == 'review':
         resp.message(response_string(review.handler(args[1:])))
     else:
-        resp.message(response_string(helper.collector(args)))
+        return helper.collector(args)
 
     return str(resp)
 
@@ -75,12 +73,9 @@ def api_handler():
         return False
     args = request_api_args(request)
 
-    if args[0].lower() == 'blog':
-        return review.handler(args[1:])
     elif args[0].lower() == 'review':
         return review.handler(args[1:])
-    elif args[0].lower() == 'daily_scores':
-        return send_bulk_sms()
+
     else:
         raise Exception(args)
 	#numbers.handler(args)

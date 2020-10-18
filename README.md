@@ -106,6 +106,8 @@ chmod 777 /opt/rvwr/
 
 service apache2 restart
 
+Updates to backend can be done by pip uninstalling and reinstalling rvwr & restarting apache2
+Updates to frontend only require changes to files in /var/www/rvwrfront & restarting apache2
 
 ###TODO:
 - Add single use URLS
