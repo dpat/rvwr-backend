@@ -52,9 +52,9 @@ def sms_handler():
         return str(resp)
 
     # confirm request is coming from correct phone line
-    if not num == app.config.get('num'):
-        resp.message("unverified twilio number has been used")
-        return str(resp)
+#    if not num == app.config.get('num'):
+ #       resp.message("unverified twilio number has been used")
+  #      return str(resp)
 
     args = request_sms_args(request)
 
@@ -74,11 +74,9 @@ def sms_handler():
 
 @app.route('/api', methods=['POST'])
 def api_handler():
-
     # confirm request is coming from correct program
     if not verify_request(request, app):
         return False
-
     args = request_api_args(request)
 
     if args[0].lower() == 'blog':

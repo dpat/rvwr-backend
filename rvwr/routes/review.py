@@ -31,7 +31,6 @@ def handler(command):
         product = command[0]
         score = command[1]
         body = command[2:]
-
         return add_review(product, score, body)
 
 
