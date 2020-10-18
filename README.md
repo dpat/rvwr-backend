@@ -4,6 +4,8 @@ A basic API for receiving & storing reviews. Supports sms reviews via Twilio
 
 A front-end (UI) for this project is located [here](https://github.com/dpat/rvwrfront).
 
+RVWR Testing site is currently running at open-sms.com/
+
 ## Prereqs
 
 Requirements are meant to be installed via pip, the requirements likely exist
@@ -107,6 +109,7 @@ service apache2 restart
 
 ###TODO:
 - Add single user URLS
+- HTTPS upgrade from http
 - Authentication for admins
 - Separate out viewing and posting reviews
 - Change routes to support companies
