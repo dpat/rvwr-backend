@@ -6,6 +6,8 @@ A front-end (UI) for this project is located [here](https://github.com/dpat/rvwr
 
 RVWR Testing site is currently running at open-sms.com/
 
+To test Twilio functionality, text +12248883248
+
 ## Prereqs
 
 Requirements are meant to be installed via pip, the requirements likely exist
