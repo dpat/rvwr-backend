@@ -25,7 +25,7 @@ from .helpers.formatting import response_string, request_sms_args, \
                                 request_api_args
 from .helpers.security import gen_token, list_token, verify_request, \
                               verify_twilio
-from .routes import review, numbers
+from .routes import review, numbers, helper
 
 app = Flask(__name__)
 
@@ -63,7 +63,7 @@ def sms_handler():
     elif args[0].lower() == 'review':
         resp.message(response_string(review.handler(args[1:])))
     else:
-        resp.message(response_string(random.collector(args)))
+        resp.message(response_string(helper.collector(args)))
 
     return str(resp)
 
